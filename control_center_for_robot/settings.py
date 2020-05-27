@@ -120,5 +120,20 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+
+PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+STATIC_ROOT= os.path.join(BASE_DIR,'staticfiles/')
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_ROOT,'static/'),
+)
+
+# Simplified static file serving.
+# https://warehouse.python.org/project/whitenoise/
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 # Param
 DISABLE_COLLECTSTATIC=1
