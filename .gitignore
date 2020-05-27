@@ -1,0 +1,5 @@
+/control_center_for_robot/__pycache__/*.pyc
+/control_center/__pycache__/*.pyc
+/control_center/migrations/__pycache__
+/.idea
+*.sqlite3
