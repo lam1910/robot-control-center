@@ -25,7 +25,7 @@ SECRET_KEY = '*l)xaee^$*^+y8ziu790l+0k5yjcc1_pt^6z$53j2nbghrbm^)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['whispering-shelf-53081.herokuapp.com', 'localhost']
 
 
 # Application definition
