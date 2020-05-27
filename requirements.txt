@@ -28,6 +28,6 @@ psycopg2==2.8
 
 django-after-response
 
-urllib
+urllib3
 
 pyodbc
