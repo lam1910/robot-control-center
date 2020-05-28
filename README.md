@@ -21,7 +21,7 @@
 	- Deploy to heroku
 
 3.	APIs:
-	- **GET** /path
+	- **GET** /path?start=(a, b)
 
 4.	Return:
 	- For success, return HTTP 200 and a Json with 3 fields:

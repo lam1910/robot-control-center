@@ -74,12 +74,24 @@ WSGI_APPLICATION = 'control_center_for_robot.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+# for heroku only. For localhost, comment the next line
+#DATABASE_URL = os.environ['DATABASE_URL']
+# use this instead
+DATABASE_URL = 'localhost'
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'USER': 'postgres',
+        'PASSWORD': 'admin',
+        'HOST': DATABASE_URL,
+        'PORT': ' 5432',
+        'NAME': 'ev3robotmanage',
     }
 }
+
+# added new DB, on localhost comment those also
+#import dj_database_url
+#DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 
 # Password validation

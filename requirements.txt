@@ -29,3 +29,8 @@ psycopg2==2.8
 django-after-response
 
 urllib3
+
+psycopg2-binary
+
+dj-database-url
+
