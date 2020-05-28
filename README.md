@@ -22,6 +22,7 @@
 
 3.	APIs:
 	- **GET** /path?start=(a, b)
+	    - with: start is the start position of the robot either point A or point B
 
 4.	Return:
 	- For success, return HTTP 200 and a Json with 3 fields:
