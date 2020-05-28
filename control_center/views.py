@@ -34,3 +34,26 @@ def get_all_record(request):
     conn.close()
 
     return HttpResponse(json.dumps(result_all), content_type='application/json', status=200)
+
+def get_path_auto(request):
+    bad_request = {'Mode': 'Bad Request', 'Path': 'Bad Request', 'Move': 'Bad Request'}
+    if 'start' in request.GET:
+        start_pos = request.GET['start']
+        # return value here
+        return_dict = {'Mode': 'Auto'}
+        # TODO: add Path and Move field
+        # TODO: query here
+    else:
+        return HttpResponse(json.dumps(bad_request), status=400)
+
+
+def get_path_manual(request):
+    bad_request = {'Mode': 'Bad Request', 'Path': 'Bad Request', 'Move': 'Bad Request'}
+    if 'start' in request.GET:
+        start_pos = request.GET['start']
+        # return value here
+        return_dict = {'Mode': 'Manual'}
+        # TODO: add Path and Move field
+        # TODO: query here
+    else:
+        return HttpResponse(json.dumps(bad_request), status=400)
