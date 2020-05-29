@@ -3,3 +3,4 @@
 /control_center/migrations/__pycache__
 /.idea
 *.sqlite3
+/control_center/migrations/
