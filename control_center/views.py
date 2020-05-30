@@ -73,8 +73,8 @@ def get_path_auto(request):
         start_pos = request.GET['start']
         # return value here
         return_dict = {'Mode': 'Auto'}
-        select_request_incomplete = 'SELECT * FROM control_center_order WHERE status = \'incomplete\' ORDER BY id ' \
-                                    'DESC LIMIT 1;'
+        select_request_incomplete = 'SELECT * FROM control_center_order WHERE status = \'incomplete\' ' \
+                                    'and start = \'{}\' ORDER BY id DESC LIMIT 1;'.format(start_pos)
 
         conn = psycopg2.connect(dbname=DATABASES['default']['NAME'], user=DATABASES['default']['USER'],
                                 password=DATABASES['default']['PASSWORD'], host=DATABASES['default']['HOST'],
@@ -82,7 +82,10 @@ def get_path_auto(request):
         with conn.cursor() as cur:
             cur.execute(select_request_incomplete)
             tmp = cur.fetchone()
-            this_pos, end_pos = tmp[0], tmp[2]
+            try:
+                this_pos, end_pos = tmp[0], tmp[2]
+            except Exception:
+                return HttpResponse(json.dumps(bad_request), status=400)
 
         with conn.cursor() as cur:
             cur.execute("SELECT * FROM path WHERE path.start=%s AND path.finish=%s;", (start_pos, end_pos))
@@ -95,16 +98,22 @@ def get_path_auto(request):
     else:
         return HttpResponse(json.dumps(bad_request), status=400)
 
-
-# the manual mode must be switched on both the server and the robot
-def get_path_manual(request):
+@csrf_exempt
+def order_done(request):
     bad_request = {'Mode': 'Bad Request', 'Path': 'Bad Request', 'Move': 'Bad Request'}
-    if 'start' in request.GET:
-        start_pos = request.GET['start']
-        # return value here
-        return_dict = {'Mode': 'Manual'}
-        # TODO: add Path and Move field
+    if request.method == 'PATCH':
+        data = json.loads(request.body)
+        id_got = data['id']
+        update_order_done = 'UPDATE control_center_order SET status = \'completed\' WHERE id = {};'.format(id_got)
+
+        conn = psycopg2.connect(dbname=DATABASES['default']['NAME'], user=DATABASES['default']['USER'],
+                                password=DATABASES['default']['PASSWORD'], host=DATABASES['default']['HOST'],
+                                port=DATABASES['default']['PORT'])
+        with conn.cursor() as cur:
+            cur.execute(update_order_done)
+
+        conn.commit()
+        conn.close()
+        return HttpResponse('Your response', status=200)
     else:
         return HttpResponse(json.dumps(bad_request), status=400)
-
-# TODO: on click for each button on manual mode
