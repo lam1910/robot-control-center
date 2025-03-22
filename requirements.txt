@@ -1,6 +1,6 @@
 Django==3.2.25
 
-gunicorn==22.0.0
+gunicorn==23.0.0
 
 Markdown==2.6.9
 
