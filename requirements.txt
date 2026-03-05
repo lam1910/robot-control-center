@@ -2,7 +2,7 @@ Django==4.2.29
 
 gunicorn==23.0.0
 
-Markdown==2.6.9
+Markdown==3.8.1
 
 Pillow>=6.2.2
 
